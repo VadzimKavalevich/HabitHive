@@ -27,18 +27,28 @@ const PostTitle = styled.Text`
 `;
 
 const PostDetails = styled.Text`
+  flex: 1;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.4);
   margin-top: 2px;
 `;
 
-export const Post = ({title, imageUrl, details}) => {
+const truncateTitle = (str) => {
+    if (str.length >=50) {
+        return str.substring(0, 50) + '...';
+    }
+    return str;
+}
+
+
+// <PostImage source={require('./../assets/Parents.jpg')} />
+export const Post = ({name, avatar, createdAt}) => {
     return (
         <PostView>
-            <PostImage source={imageUrl} />
+            <PostImage source={{ uri:avatar }} />
             <PostInfo>
-                <PostTitle>{title}</PostTitle>
-                <PostDetails>{details}</PostDetails>
+                <PostTitle>{truncateTitle(name)}</PostTitle>
+                <PostDetails>{new Date(createdAt).toLocaleDateString()}</PostDetails>
             </PostInfo>
         </PostView>
     )
